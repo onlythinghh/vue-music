@@ -1,4 +1,5 @@
 <template>
+  <!--热门推荐-->
   <div class="recommend">
     <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
@@ -81,7 +82,7 @@
     }
   }
 </script>
-<style scoped type="text/css" scoped lang="less">
+<style scoped type="text/css" lang="less">
   @import '~common/styles/variabe.less';
   .recommend {
     position: fixed;
