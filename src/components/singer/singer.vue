@@ -32,6 +32,7 @@
           }
         })
       },
+      // 数据归类（按字母）
       _normalizeSinger (list) {
         let map = {
           hot: {
@@ -47,6 +48,7 @@
               id: item.Fsinger_mid
             }))
           }
+          // 取得歌手名的首字母
           const key = item.Findex
           if (!map[key]) {
             map[key] = {

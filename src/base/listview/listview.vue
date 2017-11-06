@@ -72,6 +72,7 @@
       }
     },
     methods: {
+      // 字母列表点击事件（获取元素的索引）
       onShortcutTouchStart (e) {
         let anchorIndex = getData(e.target, 'index')
         let firstTouch = e.touches[0]
@@ -79,6 +80,7 @@
         this.touch.anchorIndex = anchorIndex
         this._scrollTo(anchorIndex)
       },
+      // 字母列手指移动击事件（与点击事件类似）
       onShortcutTouchMove (e) {
         let firstTouch = e.touches[0]
         this.touch.y2 = firstTouch.pageY
@@ -91,6 +93,7 @@
         this.scrollY = pos.y
       },
       _scrollTo (index) {
+        // 边界点击或者滑动的判断处理
         if (!index && index !== 0) {
           return
         }
@@ -102,6 +105,7 @@
         this.scrollY = -this.listHeight[index]
         this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
       },
+      // 获取每个字母下的歌手节点的总高度（group）
       _calculateHeight () {
         this.listHeight = []
         const list = this.$refs.listGroup
@@ -157,7 +161,7 @@
   .listview {
     position: relative;
     height: 100%;
-    widows: 100%;
+    width: 100%;
     overflow: hidden;
     background: @color-background;
     .list-group {

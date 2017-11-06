@@ -56,6 +56,7 @@
       refresh () {
         this.scroll && this.scroll.refresh()
       },
+      // （列表之类的）滚动到指定位置
       scrollTo () {
         this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
       },

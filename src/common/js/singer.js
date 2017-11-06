@@ -1,3 +1,4 @@
+// 歌手列表的头像
 export default class Singer {
   constructor ({ id, name }) {
     this.id = id
