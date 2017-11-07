@@ -4,7 +4,7 @@
       <li v-for="(group, index) in data" :key="index" class="list-group" ref="listGroup">
         <h2 class="list-group-title">{{group.title}}</h2>
         <ul>
-          <li class="list-group-item" v-for="(item, index) in group.items" :key="index">
+          <li class="list-group-item" @click="selectItem(item)" v-for="(item, index) in group.items" :key="index">
             <img v-lazy="item.avatar" class="avatar">
             <span class="name">{{item.name}}</span>
           </li>
@@ -72,6 +72,10 @@
       }
     },
     methods: {
+      // 列表点击 发送一个事件
+      selectItem (item) {
+        this.$emit('select', item)
+      },
       // 字母列表点击事件（获取元素的索引）
       onShortcutTouchStart (e) {
         let anchorIndex = getData(e.target, 'index')
