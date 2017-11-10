@@ -15,19 +15,23 @@
         type: Boolean,
         default: true
       },
+      listenScroll: {
+        type: Boolean,
+        default: false
+      },
       data: {
         type: Array,
         default: null
       },
-      listenScroll: {
-        type: Boolean,
-        default: false
+      refreshDelay: {
+        type: Number,
+        default: 20
       }
     },
     mounted () {
       setTimeout(() => {
         this._initScroll()
-      }, 30)
+      }, 20)
     },
     methods: {
       _initScroll () {
@@ -62,17 +66,17 @@
       },
       scrollToElement () {
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
-      },
-      watch: {
-        data () {
-          setTimeout(() => {
-            this.refresh()
-          }, 30)
-        }
+      }
+    },
+    watch: {
+      data () {
+        setTimeout(() => {
+          this.refresh()
+        }, this.refreshDelay)
       }
     }
   }
 </script>
-<style>
+<style scoped lang="less">
 
 </style>

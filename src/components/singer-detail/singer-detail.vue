@@ -1,13 +1,15 @@
 <template>
   <transition name="slid">
-    <div class="singer-detail"></div>
+    <!--<div class="singer-detail"></div>-->
+    <music-list :title="title" :songs="songs" :bg-image="bgImage" ></music-list>
   </transition>
 </template>
 <script>
   import { mapGetters } from 'vuex'
   import { getSingerDetail } from 'api/singer'
   import { ERR_OK } from 'api/config'
-  import {createSong} from 'common/js/song'
+  import { createSong } from 'common/js/song'
+  import MusicList from 'components/music-list/music-list'
 
   export default {
     data () {
@@ -16,6 +18,12 @@
       }
     },
     computed: {
+      title () {  // 获取标题（歌手）
+        return this.singer.name
+      },
+      bgImage () {  // 获取背景图
+        return this.singer.avatar
+      },
       ...mapGetters(['singer'])
     },
     created () {
@@ -32,7 +40,7 @@
         getSingerDetail(this.singer.id).then(res => {
           if (res.code === ERR_OK) {
             this.songs = this._normalizeSongs(res.data.list)
-            console.log(this.songs)
+            console.log(this.singer)
           }
         })
       },
@@ -46,20 +54,23 @@
         })
         return ret
       }
+    },
+    components: {
+      MusicList
     }
   }
 </script>
 <style scoped type="text/css" scoped lang="less">
   @import "~common/styles/variabe";
-  .singer-detail {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    background: @color-background;
-  }
+  // .singer-detail {
+  //   position: fixed;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   z-index: 100;
+  //   background: @color-background;
+  // }
   .slid-enter-active,
   .slid-leave-active {
     transition: all 0.3s;
