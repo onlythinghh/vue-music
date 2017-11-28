@@ -1,7 +1,7 @@
 <template>
   <div class="song-list"><!--歌曲列表基础组件-->
     <ul>
-      <li class="item" v-for="(song, index) in songs" :key="index">
+      <li @click="selectItem(song, index)" class="item" v-for="(song, index) in songs" :key="index">
         <div class="content">
           <h2 class="name">{{song.name}}</h2>
           <p class="disc">{{getDesc(song)}}</p>
@@ -19,6 +19,10 @@
       }
     },
     methods: {
+      selectItem (item, index) {
+        // item歌曲(当前) inex歌曲的索引
+        this.$emit('select', item, index)
+      },
       //  歌曲 详情（歌手名）
       getDesc (song) {
         return `${song.singer}/${song.album}`
