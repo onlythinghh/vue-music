@@ -2,6 +2,9 @@
   <div class="song-list"><!--歌曲列表基础组件-->
     <ul>
       <li @click="selectItem(song, index)" class="item" v-for="(song, index) in songs" :key="index">
+        <div class="rank" v-show="rank">
+          <span :class="getRankCls(index)">{{getRankText(index)}}</span>
+        </div>
         <div class="content">
           <h2 class="name">{{song.name}}</h2>
           <p class="disc">{{getDesc(song)}}</p>
@@ -16,6 +19,10 @@
       songs: {
         type: Array,
         default: []
+      },
+      rank: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -26,6 +33,19 @@
       //  歌曲 详情（歌手名）
       getDesc (song) {
         return `${song.singer}/${song.album}`
+      },
+      // 定义排行榜的icon和样式
+      getRankCls (index) {
+        if (index <= 2) {
+          return `icon icon${index}`
+        } else {
+          return 'text'
+        }
+      },
+      getRankText (index) {
+        if (index > 2) {
+          return index + 1
+        }
       }
     }
   }
@@ -44,6 +64,7 @@
       .rank {
         flex: 0 0 25px;
         width: 25px;
+        margin-right: 30px;
         text-align: center;
         .icon {
           display: inline-block;
@@ -67,7 +88,7 @@
       }
       .content {
         flex: 1;
-        line-height: 20px;
+        line-height: 13px;
         overflow: hidden;
         .name {
           .no-wrap();
