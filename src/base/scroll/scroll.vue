@@ -23,6 +23,14 @@
         type: Array,
         default: null
       },
+      pullup: {
+        type: Boolean,
+        default: false
+      },
+      beforeScroll: {
+        type: Boolean,
+        default: false
+      },
       refreshDelay: {
         type: Number,
         default: 20
@@ -48,6 +56,21 @@
           let me = this
           this.scroll.on('scroll', (pos) => {
             me.$emit('scroll', pos)
+          })
+        }
+        // 下拉加载
+        if (this.pullup) {
+          this.scroll.on('scrollEnd', () => {
+            if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
+              // 派发一个滚动到底部的事件
+              this.$emit('scrollToEnd')
+            }
+          })
+        }
+        // 组件滚动完成后派发事件
+        if (this.beforeScroll) {
+          this.scroll.on('beforeScrollStart', () => {
+            this.$emit('beforeScroll')
           })
         }
       },
